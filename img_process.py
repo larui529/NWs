@@ -1,17 +1,11 @@
 
 # coding: utf-8
-
-# In[50]:
-
-
 import os, sys
 from PIL import Image
 import numpy as np
 from matplotlib import image as mpimg
 from matplotlib import pyplot as plt
 
-
-# In[55]:
 
 
 # convert all image to other type under current path
@@ -32,15 +26,9 @@ def img_all_convert(current_path, current_type, new_type, new_path):
                 image.save(new_path + '/' + outfile)
 
 
-# In[57]:
-
-
-current_path = '/Users/nataliezhu/Documents/sem_computer_vision/images'
-new_path = '/Users/nataliezhu/Documents/sem_computer_vision/sample'
-img_all_convert(current_path, '.tif', '.jpg', new_path)
-
-
-# In[53]:
+#current_path = '/Users/nataliezhu/Documents/sem_computer_vision/images'
+#new_path = '/Users/nataliezhu/Documents/sem_computer_vision/sample'
+#img_all_convert(current_path, '.tif', '.jpg', new_path)
 
 
 # resize all images under the current path
@@ -62,8 +50,6 @@ def img_all_resize(current_path, new_path, new_size):
 # r_current_path = '/Users/nataliezhu/Documents/sem_computer_vision/img/nw'
 # r_new_path = '/Users/nataliezhu/Documents/sem_computer_vision/sample'
 # img_resize(r_current_path, r_new_path, (1000,1000))
-
-# In[54]:
 
 
 # convert all RGB images to greyscale under current path

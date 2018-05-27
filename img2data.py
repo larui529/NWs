@@ -27,8 +27,8 @@ def extract(root):
     Return:
     data_folder -- subfolders of root
     """
-    data_folders = [os.path.join(root, d) for d in sorted(os.listdir(root)) if not d.startswith('.')]
-    print data_folders
+    data_folders = [(os.path.join(root, d),d) for d in sorted(os.listdir(root)) if not d.startswith('.')]
+    #print data_folders
     return data_folders
 
 
@@ -73,17 +73,19 @@ def load(data_folders,max_num_images, image_height, image_width, pixel_depth=255
     Dataset -- dataset contains all the images in the folder, dimesion is [num_images, image_height, image_weith]
     labels -- labels of images, dimension in [num_images], data range in range(classes)
     """
-    print data_folders
+    #print data_folders
+    category_dict = {}
     dataset = np.ndarray(  # create a ndarray with (max_num_images, n_H, n_W)
         shape=(max_num_images, image_height, image_width), dtype=np.float32) 
     labels = np.ndarray(shape=(max_num_images), dtype=np.int32)
     label_index = 0 # label index start from 0
     image_index = 0 # image_index start from 0
     for folder in data_folders:
-        print folder
-        print os.listdir(folder)
-        for image in os.listdir(folder):
-            image_file = os.path.join(folder, image)
+        #print folder
+        category_dict[folder[1]] = label_index
+        #print os.listdir(folder)
+        for image in os.listdir(folder[0]):
+            image_file = os.path.join(folder[0], image)
             try:
                 image_data = (plt.imread(image_file).astype(float) -
                               pixel_depth / 2) / pixel_depth # normalize image
@@ -102,7 +104,7 @@ def load(data_folders,max_num_images, image_height, image_width, pixel_depth=255
     print 'Mean:', np.mean(dataset)
     print 'Standard deviation:', np.std(dataset)
     print 'Labels:', labels.shape
-    return dataset, labels
+    return dataset, labels, category_dict
 
 
 # In[9]:
